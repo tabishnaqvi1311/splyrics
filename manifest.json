@@ -2,6 +2,7 @@
     "manifest_version": 3,
     "name": "Spotify Lyrics",
     "description": "Bring Back Spotify Lyrics",
+    "author": "tabishnaqvi1311",
     "version": "1.0",
     "action": {
         "default_popup": "popup/index.html",
