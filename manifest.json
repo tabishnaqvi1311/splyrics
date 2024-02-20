@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Spotify Lyrics",
+    "description": "Bring Back Spotify Lyrics",
+    "version": "1.0",
+    "action": {
+        "default_popup": "popup/index.html",
+        "default_icon": "images/logo.png"
+    },
+    "content_scripts": [
+        {
+            "js": ["scripts/content.js"],
+            "matches": [
+                "https://open.spotify.com/*"
+            ]
+        }
+    ],
+    "permissions": ["activeTab", "scripting"]
+}
