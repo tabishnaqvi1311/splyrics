@@ -1,0 +1,41 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    text-align: center;
+    max-width: 250px;
+    margin: 0 auto;
+    background-color: #131213;
+}
+
+.container {
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+#status {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.links a {
+    color: #1DB954;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.links a:hover {
+    color: #ededed;
+    border-radius: 5px;
+}
