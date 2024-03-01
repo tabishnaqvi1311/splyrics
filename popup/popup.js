@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         else {
-            status.innerText = "Not On Spotify"
+            status.innerText = "Spotify Not Open"
             status.style.color = "red"
         }
     })
