@@ -25,6 +25,3 @@ That's all.
 ## What Needs To Be Done
 - populate database with lyrics
 - make popup dynamic
-- 
-
-
