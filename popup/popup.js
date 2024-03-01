@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let status = document.getElementById('status')
 
         if (isSpotify) {
-            status.innerText = "Waiting For Lyrics..."
+            status.innerText = "Spotify Open"
             status.style.color = "#e0ca00"
             return;
         }
