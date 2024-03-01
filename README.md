@@ -2,12 +2,11 @@
 
 <img src="images/logo.png" alt="Project Logo" width="150" height="150">
 
-## Usage
+## Work In Progress ⚠️
 
 Get access to paywalled lyrics on Spotify's Web Client
 
-Work In Progress
-
+Lyrics are fetched from a self hosted lyric database
 
 ## Installation
 
@@ -19,9 +18,13 @@ Then head over to `chrome://extensions`
 
 And click on load unpacked
 
-Select the cloned directory
+Select the cloned directory and add
 
 That's all.
 
+## What Needs To Be Done
+- populate database with lyrics
+- make popup dynamic
+- 
 
 
