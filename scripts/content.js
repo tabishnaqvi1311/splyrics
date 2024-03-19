@@ -1,32 +1,29 @@
-//injects a script into the webpage that can modify DOM
-const fetchAndReplace = async() => {
-    const currentTrack = document.querySelector("a[data-testid=context-link]");
-    if(currentTrack){
-        const currentTrackUrl = currentTrack.href;
-        const transformedCurrentTrackUrl = new URL(currentTrackUrl);
-        const currentTrackId = transformedCurrentTrackUrl.search.split("%3A")[2];
-        // console.log(currentTrackId)
+const main = () => {
+    let trackId = null;
 
-
+        /**
+     * Fetches lyrics from the API and replaces the DOM content with the fetched lyrics.
+     * @param {string} currentTrackId - The ID of the current track.
+     */
+    const fetchAndReplace = async (currentTrackId) => {
         const innerMostDiv = document.querySelector("main[aria-label=Spotify] > div > div:nth-child(2)");
 
         const innerMostDivSpan = innerMostDiv.querySelector("span");
-        if(!innerMostDivSpan) return;
-        if(innerMostDivSpan) innerMostDivSpan.remove();
+        if (!innerMostDivSpan) return;
+        if (innerMostDivSpan) innerMostDivSpan.remove();
 
         const singleDiv = document.createElement("div")
         innerMostDiv.appendChild(singleDiv);
 
-
+        if (!currentTrackId) return;
         const apiUrl = `http://localhost:8181/api/lyrics/${currentTrackId}`
         const response = await fetch(apiUrl)
-        if(!response.ok) {
+        if (!response.ok) {
             return;
         }
         const json = await response.json();
 
-
-        for(const line of json.lyric.lyrics.lines){
+        for (const line of json.lyric.lyrics.lines) {
             const outerDiv = document.createElement("div");
             outerDiv.setAttribute("dir", "auto");
             outerDiv.setAttribute("data-testid", "fullscreen-lyric");
@@ -36,19 +33,33 @@ const fetchAndReplace = async() => {
             outerDiv.appendChild(innerDiv)
             singleDiv.appendChild(outerDiv);
         }
-
     }
-    else console.log("not found, ", currentTrack)
+
+       /**
+     * Sends a message to the background script to request the track ID.
+     */
+    const getTrackID = () => {
+        chrome.runtime.sendMessage("reqTrackID", (response) => {
+            trackId = response.trackId;
+            console.log(trackId);
+            fetchAndReplace(trackId);
+        })
+    }
+
+    const lyricsButton = document.querySelector("button[data-testid=lyrics-button]");
+    if (!lyricsButton) setTimeout(() => {
+        main();
+    }, 5000);
+    lyricsButton.addEventListener("click", () => {
+        console.log("clicked")
+        if (lyricsButton.getAttribute("data-active") === "false") {
+            getTrackID();
+        }
+    });
 }
 
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     console.log("page fully loaded");
-//     fetchAndReplace();
-// });
-
-
-window.addEventListener("click", () => {
-    console.log("click detected, running func...");
-    fetchAndReplace();
+//entry point
+window.addEventListener("load", () => {
+    console.log("page fully loaded");
+    main();
 });

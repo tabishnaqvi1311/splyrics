@@ -12,11 +12,23 @@
     },
     "content_scripts": [
         {
-            "js": ["scripts/content.js"],
+            "js": [
+                "scripts/content.js"
+            ],
             "matches": [
                 "https://open.spotify.com/*"
             ]
         }
     ],
-    "permissions": ["activeTab", "scripting"]
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "webRequest"
+    ],
+    "host_permissions": [
+        "https://*/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
 }
